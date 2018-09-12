@@ -1,8 +1,20 @@
 <?php
     class Posts extends CI_Controller{
-        public function index(){
+        public function index($offset = 0){
+            $config['base_url'] = base_url().'posts/index/';
+            $config['total_rows'] = $this->db->count_all('posts');
+            $config['per_page'] = 3;
+            $config['uri_segment'] = 3;
+            $config['attributes'] = array('class' => 'pagination-links');
+
+
+
+
+            $this->pagination->initialize($config);
+
+
             $data['title'] = 'Latest Posts';
-            $data['posts'] = $this->post_model->get_posts();
+            $data['posts'] = $this->post_model->get_posts(false, $config['per_page'], $offset);
 
             $this->load->view('templates/header');
             $this->load->view('posts/index', $data);
@@ -13,6 +25,9 @@
         public function view($slug = NULL)
         {
             $data['post'] = $this->post_model->get_posts($slug);
+            $post_id = $data['post']['id'];
+            $data['comments'] = $this->comment_model->get_comments($post_id);
+
 
             if(empty($data['post'])){
                 show_404();
@@ -30,6 +45,9 @@
 
         public function create()
         {
+            if(!$this->session->userdata('logged_in')){
+                redirect('users/login');
+            }
             $data['title'] = 'Create Post';
 
             $data['categories'] = $this->post_model->get_categories();
@@ -62,6 +80,8 @@
                 
 
                 $this->post_model->create_post($post_image);
+                $this->session->set_flashdata('post_created', 'Your post has been created');
+
                 redirect('posts');
             }
 
@@ -70,15 +90,29 @@
 
         public function delete($id)
         {
+            if(!$this->session->userdata('logged_in')){
+                redirect('users/login');
+            }
+
             $this->post_model->delete_post($id);
+
+            $this->session->set_flashdata('post_deleted', 'Your post has been deleted');
             redirect('posts');
             
         }
 
         public function edit($slug)
         {
+            if(!$this->session->userdata('logged_in')){
+                redirect('users/login');
+            }
+
             $data['post'] = $this->post_model->get_posts($slug);
             $data['categories'] = $this->post_model->get_categories();
+
+            if($this->session->userdata('user_id') != $this->post_model->get_posts($slug)['user_id']){
+                redirect('posts');
+            }
 
 
             if(empty($data['post'])){
@@ -98,7 +132,13 @@
 
         public function update()
         {
+            if(!$this->session->userdata('logged_in')){
+                redirect('users/login');
+            }
+
             $this->post_model->update_post();
+            $this->session->set_flashdata('post_updated', 'Your post has been updated');
+
             redirect('posts');
         }
     }
