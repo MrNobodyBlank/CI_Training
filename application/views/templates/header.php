@@ -5,7 +5,7 @@
         <link rel="stylesheet" href="https://bootswatch.com/3/darkly/bootstrap.min.css">
         
         <script src="//cdn.ckeditor.com/4.10.0/standard/ckeditor.js"></script>
-        
+
     </head>
     <body>
         <nav class="navbar navbar-default">
@@ -75,3 +75,4 @@
         <?php if($this->session->flashdata('category_deleted')) : ?>
             <?php echo '<p class="alert alert-success">'.$this->session->flashdata('category_deleted').'</p>'; ?>
         <?php endif; ?>
+        
