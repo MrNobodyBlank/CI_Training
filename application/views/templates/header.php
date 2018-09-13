@@ -5,6 +5,7 @@
         <link rel="stylesheet" href="https://bootswatch.com/3/darkly/bootstrap.min.css">
         
         <script src="//cdn.ckeditor.com/4.10.0/standard/ckeditor.js"></script>
+        
     </head>
     <body>
         <nav class="navbar navbar-default">
