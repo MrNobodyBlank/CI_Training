@@ -40,7 +40,7 @@
                 <input type="password" name="password2" class="form-control" placeholder="Confirm Password">
             </div>
 
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary btn-block">Submit</button>
         </div>
     </div>
 </form>
