@@ -2,7 +2,7 @@
     <head>
         <title>ciBlog</title>
         <link rel="stylesheet" href="<?php echo base_url()?>asset/style.css">
-        <link rel="stylesheet" href="https://bootswatch.com/4/darkly/bootstrap.min.css">
+        <link rel="stylesheet" href="https://bootswatch.com/3/darkly/bootstrap.min.css">
         
         <script src="//cdn.ckeditor.com/4.10.0/standard/ckeditor.js"></script>
     </head>
@@ -14,7 +14,7 @@
                 </div>
                 <div id="navbar">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="<?php echo base_url(); ?>/">Home</a></li>
+                        <li><a href="<?php echo base_url(); ?>/">Home</a></li>
                         <li><a href="<?php echo base_url(); ?>/about">About</a></li>
                         <li><a href="<?php echo base_url(); ?>/posts">Blog</a></li>
                         <li><a href="<?php echo base_url(); ?>/categories">Categories</a></li>
@@ -22,15 +22,15 @@
 
                     <ul class="nav navbar-nav navbar-right">
                         <?php if(!$this->session->userdata('logged_in')) : ?>                       
-                            <li class="active"><a href="<?php echo base_url(); ?>/users/register">Register</a></li>
-                            <li class="active"><a href="<?php echo base_url(); ?>/users/login">Login</a></li>
+                            <li><a href="<?php echo base_url(); ?>/users/register">Register</a></li>
+                            <li><a href="<?php echo base_url(); ?>/users/login">Login</a></li>
                         <?php endif; ?>
 
                         <?php if($this->session->userdata('logged_in')) : ?>  
-                            <li class="active"><a href="<?php echo base_url(); ?>/posts/create">Create</a></li>
-                            <li class="active"><a href="<?php echo base_url(); ?>/categories/create">Create categories</a></li> 
+                            <li><a href="<?php echo base_url(); ?>/posts/create">Create</a></li>
+                            <li><a href="<?php echo base_url(); ?>/categories/create">Create categories</a></li> 
                             
-                            <li class="active"><a href="<?php echo base_url(); ?>/users/logout">Logout</a></li>
+                            <li><a href="<?php echo base_url(); ?>/users/logout">Logout</a></li>
                         <?php endif; ?>
                     </ul>
                 </div>
